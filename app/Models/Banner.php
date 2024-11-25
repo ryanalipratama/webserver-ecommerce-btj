@@ -10,7 +10,7 @@ class Banner extends Model
     protected $table = 'banners';
 
     protected $fillable = [
-        'gambar_banner', // dan atribut lainnya
+        'gambar_banner',
     ];
 
 

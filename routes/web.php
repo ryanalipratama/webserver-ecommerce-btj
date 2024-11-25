@@ -8,7 +8,11 @@ use App\Http\Controllers\Api\GetUserController;
 use App\Http\Controllers\Api\BannerAdminController;
 use App\Http\Controllers\Api\ChatAdminController;
 use App\Http\Controllers\Api\StrukAdminController;
+use App\Http\Controllers\Api\PageController;
 
+Route::get('/', [PageController::class, 'home'])->name('pengunjung.home');
+Route::get('/aboutus', [PageController::class, 'aboutus'])->name('pengunjung.aboutus');
+Route::get('/produk', [PageController::class, 'produk'])->name('pengunjung.produk');
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');

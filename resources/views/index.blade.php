@@ -64,7 +64,11 @@
                                                 <td>{{ $p->nama_produk }}</td>
                                                 <td>{{ $p->kategori_id }}</td>
                                                 <td>{{ $p->harga }}</td>
-                                                <td>{{ $p->deskripsi }}</td>
+                                                <td>
+                                                    <div style="max-height: 100px; max-width: 300px; overflow-y: auto; white-space: normal; margin: 0; padding: 0; line-height: 1.2; text-align: justify;">
+                                                        {{ $p->deskripsi }}
+                                                    </div>
+                                                </td>
                                                 <td>{{ $p->jumlah }}</td>
                                                 <td>
                                                     @if ($p->gambar)

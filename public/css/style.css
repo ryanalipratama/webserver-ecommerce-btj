@@ -1,0 +1,420 @@
+/* ---------- Default ----------*/
+*,
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-color: #1e5e20;
+    --secondary-color: rgb(32, 32, 32);
+    --background-color: #ffffff;
+    --secondary-background-color: #F2F2F2;
+    --text-color: #333333;
+}
+
+/* ---------- End of Default ----------*/
+
+/* ---------- Navbar ---------- */
+.navbar {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    box-shadow: 0 8px 16px var(--primary-color);
+}
+
+.navbar .navbar-nav .nav-link {
+    color: var(--primary-color);
+    position: relative;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    left: 0;
+    background: var(--primary-color);
+    /* Warna hijau */
+    border-radius: 9px;
+    transition: width .7s ease, background-color 0.3s ease;
+    font-weight: bolder;
+}
+
+.navbar .navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    width: 100%;
+    left: 0;
+    background: var(--primary-color);
+    /* Warna hijau */
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--primary-color);
+}
+
+.navbar-toggler:hover,
+.navbar-toggler:focus {
+    border-color: var(--secondary-color);
+}
+
+.navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28102, 204, 0, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.btn-search {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-search:hover {
+    background-color: white;
+    color: var(--primary-color);
+    border: var(--primary-color) solid 1px;
+}
+
+.form-search {
+    border: var(--primary-color) solid 1px;
+}
+
+.form-search:focus {
+    border: var(--primary-color) solid 1px;
+    box-shadow: var(--primary-color) 0 0 0 1px;
+}
+
+/* ---------- End of Navbar ----------*/
+
+/*----------- Jumbotron ------------*/
+.jumbotron {
+    background-color: var(--secondary-color);
+    box-shadow: 0 8px 16px black;
+}
+
+.jumbotron {
+    position: relative; 
+    text-align: center; 
+    height: 100vh; 
+}
+
+.jumbotron img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.jumbotron .overlay {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: white; 
+    text-align: center; 
+}
+
+.jumbotron h1 {
+    font-size: 2.5rem; 
+    font-weight: bold;
+    text-shadow: 2px 2px 0px var(--primary-color), -2px 2px 0px var(--primary-color), 2px -2px 0px var(--primary-color), -2px -2px 0px var(--primary-color);
+}
+
+.jumbotron p {
+    font-size: 1.2rem; 
+    margin: 10px 0;
+    text-shadow: 1px 1px 0px var(--primary-color), -1px 1px 0px var(--primary-color), 1px -1px 0px var(--primary-color), -1px -1px 0px var(--primary-color);
+}
+
+.jumbotron .btn {
+    padding: 10px 20px;
+    background-color: var(--primary-color); 
+    border: none;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    border: .5px solid white;
+}
+
+.jumbotron .btn:hover {
+    background-color: #fff; 
+    color: var(--primary-color);
+}
+/*----------- End of Jumbotron -----*/
+
+/* ---------- Carousel ---------- */
+.carousel-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 200px; 
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .carousel-item img {
+        height: 400px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .carousel-item img {
+        height: 500px; 
+    }
+}
+
+.shadow-custom {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    padding: 20px;
+}
+/* ---------- End of Carousel ----------*/
+
+
+/* ---------- Produk ---------- */
+.container-produk .pendahuluan-produk h1{
+    font-size: 40px;
+    font-weight: bolder;
+    color: black;
+}
+
+.container-produk .pendahuluan-produk p{
+    font-size: 15px;
+    color: var(--text-color);
+}
+
+.container-produk .card-produk {
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    height: 400px;
+    max-height: 400px;
+}
+
+.container-produk img{
+    max-height: 300px;
+    object-fit: cover;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.container-produk h5{
+    color: var(--primary-color);
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+.container-produk .card-body .btn{
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    font-size: 14px;
+}
+
+.container-produk .card-body .btn:hover{
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.container-produk .card-produk-selengkapnya {
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    height: 400px;
+    background-color: var(--primary-color);
+    color: black; 
+}
+
+.container-produk .card-produk-selengkapnya:hover {
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    height: 400px;
+    transform: scale(1.1);
+    transition: all .5s ease;
+    background-color: white;
+    color: black; 
+}
+
+.container-produk .card-produk-selengkapnya h1{
+    font-size: 50px;
+    font-weight: bolder;
+    margin-top: 25%;
+}
+/* ---------- End of Produk ----------*/
+
+/* ---------- Fasilitas Produksi ----------*/
+.container-fasilitas-produksi .pendahuluan-fasilitas-produksi h1{
+    font-size: 40px;
+    font-weight: bolder;
+    color: black;
+}
+
+.container-fasilitas-produksi .pendahuluan-fasilitas-produksi p{
+    font-size: 15px;
+    color: var(--text-color);
+}
+
+.container-fasilitas-produksi .container-fasilitas-produksi-swiper {
+    height: 450px;
+    width: fit-content;
+    border-radius: 15px;
+    position: relative;
+    
+}
+
+.container-fasilitas-produksi .container-fasilitas-produksi-swiper img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.container-fasilitas-produksi .container-fasilitas-produksi-swiper img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+    border-radius: 15px;
+}
+
+.container-fasilitas-produksi .container-fasilitas-produksi-swiper h1 {
+    position: absolute; 
+    top: 75%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    color: var(--primary-color); 
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.swiper-pagination-bullet {
+    background-color: green; /* Ganti warna menjadi hijau */
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--primary-color); /* Warna lebih gelap untuk titik aktif */
+}
+/* ---------- End of Fasilitas Produksi ----------*/
+
+/* ---------- Gambar Judul Halaman ----------*/
+.gambar-judul {
+    height: 300px; 
+    overflow: hidden;
+    border-bottom-right-radius: 200px;
+    border: 3px solid var(--primary-color);
+}
+
+.gambar-judul img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom-right-radius: 200px;
+}
+
+.gambar-judul h1 {
+    font-size: 48px; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+/* ---------- End of Gambar Judul Halaman ----------*/
+
+/* ---------- Halaman Home ----------*/
+.breadcrumb {
+    background-color: transparent; 
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: " / "; 
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: var(--primary-color); 
+    font-weight: bold;
+}
+
+.breadcrumb-item.active {
+    color: black; 
+}
+/* ---------- End of Halaman Home ----------*/
+
+/* ---------- About Us ----------*/
+.container-aboutus img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.container-aboutus h1{
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.container-aboutus p{
+    color: var(--text-color);
+    font-size: 14px;
+    text-align: justify;
+}
+
+/* ---------- End of About Us ----------*/
+
+/* ---------- Footer ----------*/
+.footer1 {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 0; 
+    margin-top: 50px;
+}
+
+
+.footer1 .container h2{
+    font-weight: bolder;
+    font-size: 30px;
+    padding-bottom: 20px;
+}
+
+.footer1 .container p{
+    font-size: 13px;
+    color: white;
+    text-decoration: none;
+}
+
+.footer1 .container iframe{
+    width: 80%;
+    height: 200px;
+}
+
+.footer2{
+    background-color: black;
+    color: #ffffff;
+}
+/* ---------- End of Footer ----------*/
