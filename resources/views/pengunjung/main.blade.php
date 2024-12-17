@@ -34,6 +34,9 @@
     <!-- AOS -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
+    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css" rel="stylesheet">
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
@@ -64,19 +67,19 @@
                         <a class="nav-link" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/produk">Produk</a>
+                        <a class="nav-link" aria-current="page" href="/product">Produk</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/aboutus">About US</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Masuk</a>
+                        <a class="nav-link" href="#" onclick="showAlertMasuk()" >Masuk</a>
                     </li>
                 </ul>
                 <!-- Form pencarian di kanan -->
                 <form class="d-flex" role="search">
                     <input class="form-control form-search me-2" type="search" placeholder="Cari Produk" aria-label="Search">
-                    <button class="btn btn-search" type="submit">Cari</button>
+                    <button class="btn btn-search" type="submit" onclick="showAlertSearch()">Cari</button>
                 </form>
             </div>
         </div>
@@ -89,6 +92,14 @@
         @yield('content')
     </main>
     <!-- End Main Content -->
+
+    <!-- Flooting Button -->
+    <div class="container floating-button-container">
+        <a href="https://wa.me/6285222545454?text=Halo,%20saya%20ingin%20konsultasi%20produk!" class="btn rounded-circle floating-button" target="_blank">
+            <img src="{{ asset('lte/dist/img/btj.png') }}" alt="Logo" width="50">
+        </a>
+    </div>
+    <!-- End Flooting Button -->
 
     <!-- Footer -->
     <footer class="footer1" data-aos="fade-up">
@@ -204,6 +215,10 @@
 
     <!-- AOS JS -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
+    
 
 </body>
 

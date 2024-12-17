@@ -23,11 +23,22 @@ class PageController extends Controller
         return view('pengunjung.aboutus');
     }
 
-    public function produk()
+    public function product()
     {
         $produk = Produk::all();
         $kategori = Kategori::all();
         return view ('pengunjung.produk', compact('produk', 'kategori'));
+    }
+
+    public function produk_selengkapnya($id)
+    {
+        $produk = Produk::find($id); 
+    
+        if (!$produk) {
+            abort(404); 
+        }
+
+        return view('pengunjung.produk_selengkapnya', compact('produk'));
     }
 
     

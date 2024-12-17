@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\ChatController;
+use App\Http\Controllers\Api\PaymentController;
 // Register
 Route::post("register", [ApiController::class, "register"]);
 
@@ -39,9 +40,9 @@ Route::group([
     // Rute untuk user mendapatkan pesan dengan admin
     Route::get('user-messages', [ChatController::class, 'getUserMessages']);
 
-    
 });
 
+Route::middleware(['auth:sanctum'])->post('payment/create', [PaymentController::class, 'createTransaction']);
 
 // Rute untuk admin mengirim pesan ke pengguna
 Route::post('send-message/admin', [ChatController::class, 'sendMessageFromAdmin']);
@@ -67,6 +68,9 @@ Route::get('kategori', [KategoriController::class, 'index']);
 Route::post('kategori', [KategoriController::class, 'store']);
 Route::put('kategori/{id}', [KategoriController::class, 'update']);
 Route::delete('kategori/{id}', [KategoriController::class, 'destroy']);
+
+// Midtrans Routes
+Route::post('payment/notification', [PaymentController::class, 'paymentNotification']);
 
 
 /*Route::get('/user', function (Request $request) {

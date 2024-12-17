@@ -69,21 +69,23 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ $item->nama_produk }}</h5>
-                            <a href="#" class="btn btn-primary">Baca Selengkapnya</a>
+                            <a href="{{ route('pengunjung.produk_selengkapnya', $item->id) }}" class="btn btn-primary">Baca Selengkapnya</a>
                         </div>
                     </div>
                 </div>
                 @if ($index == 6)
                     <!-- Cek jika ini produk ke-7 -->
                     <div class="col-lg-3">
-                        <div class="container container-produk-selengkapnya">
-                            <div class="card card-produk-selengkapnya">
-                                <div class="card-body">
-                                    <h1 class="card-title">Lihat Semua Produk</h1>
-                                    <h2>----------></h1>
+                        <a href="{{ route('pengunjung.produk') }}" class="text-decoration-none">
+                            <div class="container container-produk-selengkapnya">
+                                <div class="card card-produk-selengkapnya">
+                                    <div class="card-body">
+                                        <h1 class="card-title">Lihat Semua Produk</h1>
+                                        <h2>----------></h1>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endif
             @endforeach

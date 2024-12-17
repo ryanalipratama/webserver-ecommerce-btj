@@ -219,9 +219,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/getuser" class="nav-link">
+                <a href="/getstruk" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Pesanan</p>
+                  <p>Struk</p>
                 </a>
               </li>
               

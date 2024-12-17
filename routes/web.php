@@ -9,10 +9,12 @@ use App\Http\Controllers\Api\BannerAdminController;
 use App\Http\Controllers\Api\ChatAdminController;
 use App\Http\Controllers\Api\StrukAdminController;
 use App\Http\Controllers\Api\PageController;
+use App\Http\Controllers\Api\GetStrukController;
 
 Route::get('/', [PageController::class, 'home'])->name('pengunjung.home');
 Route::get('/aboutus', [PageController::class, 'aboutus'])->name('pengunjung.aboutus');
-Route::get('/produk', [PageController::class, 'produk'])->name('pengunjung.produk');
+Route::get('/product', [PageController::class, 'product'])->name('pengunjung.produk');
+Route::get('/produk_selengkapnya/{id}', [PageController::class, 'produk_selengkapnya'])->name('pengunjung.produk_selengkapnya');
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
@@ -43,4 +45,6 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
     Route::get('/chat/{userId}', [ChatAdminController::class, 'showChat'])->name('chat');
     Route::post('send-message/admin', [ChatAdminController::class, 'sendMessageFromAdmin'])->name('sendMessageAdmin');
     Route::get('/check-new-messages', [ChatAdminController::class, 'checkNewMessages'])->name('check-new-messages');
+
+    Route::get('/getstruk', [GetStrukController::class, 'getStruk'])->name('getstruk');
 });

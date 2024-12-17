@@ -62,9 +62,37 @@ document.addEventListener("DOMContentLoaded", function() {
             },
         },
     });
+
+  
+
     
+
     
 
     
 });
+
+function showAlertPesanSekarang() {
+    Swal.fire({
+        icon: "error",
+        title: "Maaf...",
+        text: "Saat ini fitur pembelian didalam website sedang dikembangkan. Silahkan hubungi admin melalui WhatsApp yang tertera atau tekan icon WhatsApp untuk melakukan pesanan!.",
+    });
+}
+
+function showAlertMasuk(){
+    Swal.fire({
+        icon: "error",
+        title: "Maaf...",
+        text: "Saat ini fitur untuk login user sedang dikembangkan.",
+    });
+}
+
+function showAlertSearch(){
+    Swal.fire({
+        icon: "error",
+        title: "Maaf...",
+        text: "Saat ini fitur fitur mencari produk sedang dikembangkan.",
+    });
+}
 

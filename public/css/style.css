@@ -244,7 +244,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
     height: 400px;
     background-color: var(--primary-color);
-    color: black; 
+    color: white; 
 }
 
 .container-produk .card-produk-selengkapnya:hover {
@@ -366,7 +366,7 @@ body {
 }
 /* ---------- End of Halaman Home ----------*/
 
-/* ---------- About Us ----------*/
+/* ---------- Bintang Tiga Jaya ----------*/
 .container-aboutus img{
     width: 300px;
     height: 300px;
@@ -385,7 +385,119 @@ body {
     text-align: justify;
 }
 
-/* ---------- End of About Us ----------*/
+/* ---------- End of Bintang Tiga Jaya ----------*/
+
+/* ---------- Why Us ----------*/
+.garis-whyus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; 
+    margin-top: 100px;
+}
+  
+.garis-whyus .line {
+    flex: 1;
+    height: 1px; 
+    background-color: var(--primary-color); 
+}
+  
+.garis-whyus h2 {
+    margin: 0;
+    font-size: 20px; 
+    color: var(--primary-color); 
+    font-weight: bold;
+}
+
+.container-whyus h1{
+    font-weight: bolder;
+    font-size: 20px;
+    color: var(--primary-color);
+}
+
+.container-whyus p{
+    font-size: 13px;
+    color: var(--text-color);
+    text-align: justify;
+}
+
+.container-whyus i{
+    color: var(--primary-color);
+}
+
+/* ---------- End Of Why Us ----------*/
+
+/* ---------- Produk Selengkapnya ----------*/
+.container-halaman-produk-selengkapnya h1{
+    color: var(--primary-color);
+    font-weight: bolder;
+    font-size: 25px;
+    text-align: justify;
+}
+
+.container-halaman-produk-selengkapnya p{
+    color: var(--text-color);
+    text-align: justify;
+    font-size: 15px;
+}
+
+.container-halaman-produk-selengkapnya h3{
+    color: red;
+    text-align: justify;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.container-halaman-produk-selengkapnya .btn{
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 13px;
+}
+
+.container-halaman-produk-selengkapnya .btn:hover{
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.container-halaman-produk-selengkapnya .container-gambar-selengkapnya {
+    height: 400px;
+    width: auto;
+}
+
+.container-halaman-produk-selengkapnya img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+/* ---------- End Of Produk Selengkapnya ----------*/
+
+/* ---------- Flooting Button ----------*/
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: white;
+    border: 2px solid var(--secondary-color); 
+}
+
+.container .floating-button{ 
+    background-color: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 100%;
+    width: 70px; 
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 4px 4px 8px var(--primary-color);
+}
+
+.container .floating-button img{
+    width: 90%;
+}
+/* ---------- End of Flooting Button ----------*/
 
 /* ---------- Footer ----------*/
 .footer1 {
