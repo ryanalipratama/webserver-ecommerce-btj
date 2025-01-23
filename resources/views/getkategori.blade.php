@@ -77,10 +77,12 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <p>Apakah yakin ingin menghapus data
-                                                                <b>{{ $k->nama_kategori }}</b></p>
+                                                                <b>{{ $k->nama_kategori }}</b>
+                                                            </p>
                                                         </div>
                                                         <div class="modal-footer justify-content-between">
-                                                            <form action="{{ route('kategori.delete', ['id' => $k->id]) }}" method="POST">
+                                                            <form action="{{ route('kategori.delete', ['id' => $k->id]) }}"
+                                                                method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="button" class="btn btn-default"

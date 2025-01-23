@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
@@ -8,90 +7,115 @@ use App\Models\Message;
 use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\Contract\Database;
 
-class ChatAdminController extends controller
+class ChatAdminController extends Controller
 {
-    public function checkNewMessages()
-    {
-        // Ambil pesan terbaru dari pelanggan yang belum dibaca
-        $latestMessage = Message::where('receiver_type', 'App\\Models\\Admin')
-            ->where('is_read', false)
-            ->latest()
-            ->first();
-
-        if ($latestMessage) {
-            return response()->json([
-                'newMessage' => true,
-                'message' => $latestMessage,
-            ]);
-        } else {
-            return response()->json([
-                'newMessage' => false,
-            ]);
-        }
-    }
-
     public function showChat(Request $request, $userId)
-{
-    // Logika untuk mengambil detail pengguna dan pesan
-    $user = User::find($userId);
-    $messages = Message::where('receiver_id', $userId)->orWhere('sender_id', $userId)->get();
+    {
+        $adminId = 1; // ID admin yang sudah ditentukan
+        $user = User::find($userId);
 
-    return view('chat', compact('user', 'messages'));
-}
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found');
+        }
 
+        $firebase = (new Factory)
+            ->withServiceAccount(storage_path(env('FIREBASE_CREDENTIALS')))
+            ->withDatabaseUri(env('FIREBASE_DATABASE_URL'));
 
-    // Metode untuk admin mengirim pesan ke pengguna
+        $database = $firebase->createDatabase();
+
+        $messages = [];
+
+        // Ambil pesan dari user ke admin
+        $messagesRefUserToAdmin = $database->getReference('chats/' . $userId . '/' . $adminId)
+    ->orderByChild('timestamp'); // Urutkan berdasarkan timestamp
+$messagesFromUser = $messagesRefUserToAdmin->getValue();
+
+        if ($messagesFromUser) {
+            foreach ($messagesFromUser as $messageId => $message) {
+                $messages[] = [
+                    'message_id' => $messageId,
+                    'sender_id' => (int)$message['sender_id'],
+                    'sender_type' => $message['sender_type'],
+                    'receiver_id' => (int)$message['receiver_id'],
+                    'receiver_type' => $message['receiver_type'],
+                    'message' => $message['message'],
+                    'timestamp' => $message['timestamp'],
+                ];
+            }
+        }
+
+        // Urutkan pesan berdasarkan timestamp
+        usort($messages, function ($a, $b) {
+            return $a['timestamp'] <=> $b['timestamp'];
+        });
+
+        return view('chat', [
+            'adminId' => (int)$adminId,
+            'userId' => (int)$userId,
+            'user' => $user,
+            'messages' => $messages,
+        ]);
+    }
+
     public function sendMessageFromAdmin(Request $request)
-    {
-        // $admin = Auth::admin();
+{
+    $adminId = 1; // ID admin yang sudah ditentukan
 
-        // if (get_class($admin) !== Admin::class) {
-        //     return response()->json(['error' => 'Unauthorized'], 403);
-        // }
-        $adminId = 1;
+    $validatedData = $request->validate([
+        'receiver_id' => 'required|exists:users,id',
+        'message' => 'required_without:file|string', // Pesan wajib ada jika tidak ada file
+        'file' => 'nullable|file|mimes:jpg,jpeg,png,pdf,docx,mp4|max:10240', // Validasi file
+    ]);
 
-        $validatedData = $request->validate([
-            'receiver_id' => 'required|exists:users,id',
-            'message' => 'required|string',
-        ]);
+    $receiverId = (int)$validatedData['receiver_id'];
+    $user = User::find($receiverId);
 
-        $message = Message::create([
-            'sender_id' => $adminId,
-            'sender_type' => Admin::class,
-            'receiver_id' => $validatedData['receiver_id'],
-            'receiver_type' => User::class,
-            'message' => $validatedData['message'],
-        ]);
-
-        return redirect()->route('chat', ['userId' => $request->receiver_id]);
+    if (!$user) {
+        return response()->json(['error' => 'User not found'], 404);
     }
 
-    // Metode untuk admin mendapatkan semua pesan dengan user
-    public function getAdminMessages()
-    {
-        // $admin = Auth::user();
+    $messageData = [
+        'sender_id' => (int)$adminId,
+        'sender_type' => 'admin',
+        'receiver_id' => (int)$receiverId,
+        'receiver_type' => 'user',
+        'message' => $validatedData['message'] ?? null,
+        'timestamp' => now()->timestamp,
+    ];
 
-        // if (get_class($admin) !== Admin::class) {
-        //     return response()->json(['error' => 'Unauthorized'], 403);
-        // }
+    // Jika ada file, upload ke Firebase Storage dan dapatkan URL
+    if ($request->hasFile('file')) {
+        $file = $request->file('file');
+        $firebaseStorage = (new Factory)
+            ->withServiceAccount(storage_path(env('FIREBASE_CREDENTIALS')))
+            ->createStorage();
 
-        \Log::info("Fetching all messages for admin");
+        $filePath = 'chats/' . $adminId . '/' . $receiverId . '/' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $firebaseStorage->getBucket()->upload(
+            fopen($file->getPathname(), 'r'),
+            ['name' => $filePath]
+        );
 
-        $adminId = 1; // Menggunakan ID admin yang sedang login
+        // Dapatkan URL file
+        $fileUrl = 'https://firebasestorage.googleapis.com/v0/b/' . env('FIREBASE_STORAGE_BUCKET') . '/o/' . urlencode($filePath) . '?alt=media';
 
-        $messages = Message::where(function ($query) use ($adminId) {
-            $query->where('sender_id', $adminId)
-                ->where('sender_type', Admin::class);
-        })->orWhere(function ($query) use ($adminId) {
-            $query->where('receiver_id', $adminId)
-                ->where('receiver_type', Admin::class);
-        })->orderBy('created_at', 'asc')->get();
-
-        \Log::info('Messages found: ' . $messages->count());
-
-        return response()->json($messages);
+        // Tambahkan URL file ke dalam data pesan
+        $messageData['file'] = $fileUrl;
     }
 
+    $firebase = (new Factory)
+        ->withServiceAccount(storage_path(env('FIREBASE_CREDENTIALS')))
+        ->withDatabaseUri(env('FIREBASE_DATABASE_URL'));
 
+    $database = $firebase->createDatabase();
+
+    // Simpan pesan di Firebase (admin ke user)
+    $database->getReference('chats/' . $adminId . '/' . $receiverId)->push($messageData);
+
+    return redirect()->route('chat', ['userId' => $receiverId]);
+}
 }

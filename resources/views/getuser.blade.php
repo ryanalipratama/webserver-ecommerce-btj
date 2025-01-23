@@ -61,7 +61,11 @@
                                                 <td>{{ $g->name }}</td>
                                                 <td>{{ $g->email }}</td>
                                                 <td>{{ $g->telepon }}</td>
-                                                <td>{{ $g->alamat }}</td>
+                                                <td>
+                                                    <div style="max-height: 100px; max-width: 300px; overflow-y: auto; white-space: normal; margin: 0; padding: 0; line-height: 1.2; text-align: justify;">
+                                                        {{ $g->alamat }}
+                                                    </div>
+                                                </td>
                                                 <td>
                                                     @if ($g->foto_profil)
                                                         <img src="{{ asset($g->foto_profil) }}" alt="{{ $g->name }}"

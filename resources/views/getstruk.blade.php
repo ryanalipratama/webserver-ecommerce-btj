@@ -41,7 +41,6 @@
                                         <th>Jasa Pengiriman</th>
                                         <th>Biaya Pengiriman</th>
                                         <th>Total Harga</th>
-                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,7 +64,6 @@
                                             <td>{{ $g->jasa_pengiriman }}</td>
                                             <td>{{ $g->biaya_pengiriman }}</td>
                                             <td>{{ $g->total_harga }}</td>
-                                            <td>{{ $g->status }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -10,6 +10,9 @@ use App\Http\Controllers\Api\ChatAdminController;
 use App\Http\Controllers\Api\StrukAdminController;
 use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\GetStrukController;
+use Illuminate\Support\Facades\App;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\Database;
 
 Route::get('/', [PageController::class, 'home'])->name('pengunjung.home');
 Route::get('/aboutus', [PageController::class, 'aboutus'])->name('pengunjung.aboutus');
@@ -18,6 +21,14 @@ Route::get('/produk_selengkapnya/{id}', [PageController::class, 'produk_selengka
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+Route::get('/test-firebase', function () {
+    $firebase = app('firebase');
+    $database = $firebase->getReference('test');
+    $database->set(['status' => 'connected']);
+
+    return response()->json(['message' => 'Firebase connected successfully']);
+});
 
     Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/produk', [HomeAdminController::class, 'index'])->name('index');
@@ -43,8 +54,7 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 
     Route::get('/getuser', [GetUserController::class, 'getUser'])->name('getuser');
     Route::get('/chat/{userId}', [ChatAdminController::class, 'showChat'])->name('chat');
-    Route::post('send-message/admin', [ChatAdminController::class, 'sendMessageFromAdmin'])->name('sendMessageAdmin');
-    Route::get('/check-new-messages', [ChatAdminController::class, 'checkNewMessages'])->name('check-new-messages');
+    Route::post('send-message/admin', [ChatAdminController::class, 'sendMessageFromAdmin'])->name('sendMessageFromAdmin');
 
     Route::get('/getstruk', [GetStrukController::class, 'getStruk'])->name('getstruk');
 });
